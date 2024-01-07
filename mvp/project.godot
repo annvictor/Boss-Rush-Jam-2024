@@ -1,0 +1,25 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Boss Rush Jam 2024"
+config/description="Godot é a engine onde o protótipo da verdadeira monstruosidade será criado e testado!"
+config/version="Alpha 0.1"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="Boss Rush Jam 2024"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

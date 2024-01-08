@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://batr5w6scxxb5"]
+
+[ext_resource type="Script" path="res://player/scripts/player.gd" id="1_r4i64"]
+[ext_resource type="Texture2D" uid="uid://bagf56bvacg46" path="res://pixel art/playersheet.png" id="2_8sfil"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1cgj"]
+size = Vector2(10, 2)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(160, 90)
+script = ExtResource("1_r4i64")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_8sfil")
+hframes = 5
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_a1cgj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -11.0
+offset_top = -54.0
+offset_right = 12.0
+offset_bottom = -31.0

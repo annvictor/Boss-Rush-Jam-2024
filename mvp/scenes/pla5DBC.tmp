@@ -47,6 +47,9 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(160, 90)
 script = ExtResource("1_r4i64")
+spd = null
+friction = null
+acceleration = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
@@ -64,5 +67,3 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-
-[connection signal="mouse_shape_entered" from="." to="." method="_on_mouse_shape_entered"]

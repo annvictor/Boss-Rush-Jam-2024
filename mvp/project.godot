@@ -13,7 +13,7 @@ config_version=5
 config/name="Boss Rush Jam 2024"
 config/description="Godot é a engine onde o protótipo da verdadeira monstruosidade será criado e testado!"
 config/version="Alpha 0.1"
-run/main_scene="res://scenes/arena.tscn"
+run/main_scene="res://scenes/oitavas.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

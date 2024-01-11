@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsls13j5uxsvt"]
+
+[ext_resource type="Texture2D" uid="uid://d35isw648442d" path="res://pixel art/Barra de vida/Spr_Barra de vida.png" id="1_61i8d"]
+[ext_resource type="Texture2D" uid="uid://wgsd0642fasu" path="res://pixel art/Barra de vida/spr_vida.png" id="2_scpjx"]
+
+[node name="BarHP" type="Sprite2D"]
+position = Vector2(25, 11)
+texture = ExtResource("1_61i8d")
+
+[node name="hpPoint" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-4, -1)
+texture = ExtResource("2_scpjx")

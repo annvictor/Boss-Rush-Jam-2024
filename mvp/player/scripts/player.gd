@@ -3,36 +3,29 @@ extends CharacterBody2D
 signal hit # Detecta colisão com inimigos.
 
 # Declaração das variáveis de movimento.
-@export var spd = 64
+var dir = Vector2.ZERO
+@export var spd = 128
 @export var friction = 0.8
 @export var acceleration = 0.4
 # Declaração das variáveis de animação.
-@onready var anim = $AnimationPlayer
-@onready var animTree = $AnimationTree
+@onready var anim = $Animation
+@onready var animTree: AnimationTree = $AnimationTree
 
 func _ready(): # Função executada automaticamente durante a inicialização da cena.
-	pass
+	animTree.active = true
 
 func _physics_process(_delta): # Função executada a cada frame de cena.
 	move()
+	if Input.is_action_pressed("time_travel"):
+		time_travel()
 	move_and_slide() # Função nativa que atualiza a posição do objeto com base em sua velocidade.
+	update_animation()
 
 func move(): # Função de movimentação do objeto.
-	var dir = Vector2( # Vetor de direção do objeto, armazena os inputs referentes à movimentação.
+	dir = Vector2( # Vetor de direção do objeto, armazena os inputs referentes à movimentação.
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down")
 		)
-	
-	if dir.x > 0: # Movimentação para a direita.
-		anim.play("walk_right")
-	elif dir.x < 0: # Movimentação para a esquerda.
-		anim.play("walk_left")
-	elif dir.y > 0: # Movimentação para cima.
-		anim.play("walk_up")
-	elif dir.y < 0: # Movimentação para baixo.
-		anim.play("walk_down")
-	else: # Parado.
-		anim.play("idle_down")
 	
 	if dir != Vector2.ZERO:
 		velocity.x = lerp(velocity.x, dir.x * spd, acceleration) # Cálculo da velocidade do objeto no eixo horizontal.
@@ -42,7 +35,23 @@ func move(): # Função de movimentação do objeto.
 	velocity.x = lerp(velocity.x, dir.x * spd, friction) # Cálculo da desaceleração do objeto no eixo horizontal.
 	velocity.y = lerp(velocity.y, dir.y * spd, friction) # Cálculo da desaceleração do objeto no eixo vertical.
 
-func _on_mouse_shape_entered(shape_idx): # Emite um feedback visual de dano sofrido.
+func time_travel(): # Função que desacelera a animação e diminui a velocidade do personagem, criando um efeito de slow motion. Dentro do jogo, simula a mecânica de viagem no tempo.
+	spd = 64
+	$Animation.speed_scale = 0.1
+
+func update_animation(): # Função que atualiza a animação do sprite.
+	if velocity.length() > 10:
+		animTree["parameters/conditions/is_moving"] = true
+		animTree["parameters/conditions/idle"] = false
+	else:
+		animTree["parameters/conditions/is_moving"] = false
+		animTree["parameters/conditions/idle"] = true
+	
+	if dir != Vector2.ZERO:
+		animTree["parameters/idle/blend_position"] = dir
+		animTree["parameters/walk/blend_position"] = dir
+
+func _on_mouse_shape_entered(_shape_idx): # Emite um feedback visual de dano sofrido.
 	hide() # Objeto desaparece após sofrer dano.
 	hit.emit()
 	

@@ -228,6 +228,9 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 position = Vector2(160, 90)
 collision_layer = 3
 script = ExtResource("1_r4i64")
+spd = null
+friction = null
+acceleration = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -16)

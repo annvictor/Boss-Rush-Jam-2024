@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx7lwxlflivfg"]
+
+[ext_resource type="PackedScene" uid="uid://batr5w6scxxb5" path="res://player/scenes/player.tscn" id="1_sfyx6"]
+[ext_resource type="PackedScene" uid="uid://qwt0t3jcvem6" path="res://enemys/slime/scenes/slime.tscn" id="2_fdqy2"]
+
+[node name="Arena" type="Node2D"]
+position = Vector2(160, 90)
+
+[node name="Player" parent="." instance=ExtResource("1_sfyx6")]
+position = Vector2(0, 0)
+spd = 128
+friction = 0.8
+acceleration = 0.4
+
+[node name="Slime" parent="." instance=ExtResource("2_fdqy2")]
+position = Vector2(0, 75)

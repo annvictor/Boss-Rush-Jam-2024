@@ -8,7 +8,6 @@ var dir = Vector2.ZERO
 @export var friction = 0.8
 @export var acceleration = 0.4
 # Declaração das variáveis de animação.
-@onready var anim = $Animation
 @onready var animTree: AnimationTree = $AnimationTree
 
 func _ready(): # Função executada automaticamente durante a inicialização da cena.
@@ -18,8 +17,10 @@ func _physics_process(_delta): # Função executada a cada frame de cena.
 	move()
 	if Input.is_action_pressed("time_travel"):
 		time_travel()
-	move_and_slide() # Função nativa que atualiza a posição do objeto com base em sua velocidade.
+	if spd == 64 and Input.is_action_pressed("bossfight_switch"):
+		bossfight_switch()
 	update_animation()
+	move_and_slide() # Função nativa que atualiza a posição do objeto com base em sua velocidade.
 
 func move(): # Função de movimentação do objeto.
 	dir = Vector2( # Vetor de direção do objeto, armazena os inputs referentes à movimentação.
@@ -28,16 +29,18 @@ func move(): # Função de movimentação do objeto.
 		)
 	
 	if dir != Vector2.ZERO:
-		velocity.x = lerp(velocity.x, dir.x * spd, acceleration) # Cálculo da velocidade do objeto no eixo horizontal.
-		velocity.y = lerp(velocity.y, dir.y * spd, acceleration) # Cálculo da velocidade do objeto no eixo vertical.
+		velocity.x = lerp(velocity.x, dir.normalized().x * spd, acceleration) # Cálculo da velocidade do objeto no eixo horizontal.
+		velocity.y = lerp(velocity.y, dir.normalized().y * spd, acceleration) # Cálculo da velocidade do objeto no eixo vertical.
 		return
 	
-	velocity.x = lerp(velocity.x, dir.x * spd, friction) # Cálculo da desaceleração do objeto no eixo horizontal.
-	velocity.y = lerp(velocity.y, dir.y * spd, friction) # Cálculo da desaceleração do objeto no eixo vertical.
+	velocity.x = lerp(velocity.x, dir.normalized().x * spd, friction) # Cálculo da desaceleração do objeto no eixo horizontal.
+	velocity.y = lerp(velocity.y, dir.normalized().y * spd, friction) # Cálculo da desaceleração do objeto no eixo vertical.
 
 func time_travel(): # Função que desacelera a animação e diminui a velocidade do personagem, criando um efeito de slow motion. Dentro do jogo, simula a mecânica de viagem no tempo.
 	spd = 64
-	$Animation.speed_scale = 0.1
+
+func bossfight_switch():
+	spd = 128
 
 func update_animation(): # Função que atualiza a animação do sprite.
 	if velocity.length() > 10:

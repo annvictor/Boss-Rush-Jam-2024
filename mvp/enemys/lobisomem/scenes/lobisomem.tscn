@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://qwt0t3jcvem6"]
+
+[ext_resource type="Script" path="res://enemys/lobisomem/scripts/state_machine.gd" id="3_1sdyn"]
+[ext_resource type="Script" path="res://enemys/lobisomem/scripts/idle.gd" id="3_6umlx"]
+[ext_resource type="Script" path="res://enemys/lobisomem/scripts/state.gd" id="3_i4cso"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_i5q3f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g763y"]
+radius = 101.124
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikwh8"]
+size = Vector2(10, 12)
+
+[node name="Lobisomem" type="CharacterBody2D"]
+position = Vector2(160, 90)
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(10, 11.31)
+texture = SubResource("CanvasTexture_i5q3f")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+show_behind_parent = true
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionArea" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_g763y")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+shape = SubResource("RectangleShape2D_ikwh8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 8.0
+offset_right = 100.0
+offset_bottom = 13.0
+grow_horizontal = 2
+value = 100.0
+fill_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureProgressBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -13.0
+offset_top = -8.0
+offset_right = 73.0
+offset_bottom = 15.0
+grow_horizontal = 2
+scale = Vector2(0.3, 0.3)
+text = "Lobisomen"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -11.5
+offset_right = 48.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Boss Slained"
+
+[node name="Debug" type="Label" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource("3_1sdyn")
+
+[node name="Idle" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_6umlx")
+
+[node name="Chase" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_i4cso")
+
+[node name="MeleeAttack" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_i4cso")
+
+[node name="JumpAttack" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_i4cso")
+
+[node name="AssaultAttack" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_i4cso")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

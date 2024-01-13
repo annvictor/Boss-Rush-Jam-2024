@@ -8,6 +8,7 @@ size = Vector2(10, 2)
 
 [sub_resource type="Animation" id="Animation_nqomm"]
 length = 0.001
+step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,7 +36,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_pkpn4"]
 resource_name = "idle_down"
-length = 0.9
+length = 0.60001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -52,7 +53,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6qcem"]
 resource_name = "walk_down"
-length = 0.79
+length = 0.80001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -69,7 +70,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_m4emw"]
 resource_name = "walk_left"
-length = 0.79
+length = 0.80001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -98,7 +99,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_10jft"]
 resource_name = "walk_right"
-length = 0.79
+length = 0.80001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -127,7 +128,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_slxri"]
 resource_name = "walk_up"
-length = 0.79
+length = 0.80001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -257,5 +258,7 @@ parameters/conditions/idle = false
 parameters/conditions/is_moving = false
 parameters/idle/blend_position = Vector2(-0.9984, 0.015873)
 parameters/walk/blend_position = Vector2(0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="mouse_shape_entered" from="." to="." method="_on_mouse_shape_entered"]

@@ -23,10 +23,7 @@ func _physics_process(_delta): # Função executada a cada frame de cena.
 	move_and_slide() # Função nativa que atualiza a posição do objeto com base em sua velocidade.
 
 func move(): # Função de movimentação do objeto.
-	dir = Vector2( # Vetor de direção do objeto, armazena os inputs referentes à movimentação.
-		Input.get_axis("move_left", "move_right"),
-		Input.get_axis("move_up", "move_down")
-		)
+	dir = Input.get_vector("move_left", "move_right", "move_up", "move_down") # Vetor de direção do objeto, armazena os inputs referentes à movimentação.
 	
 	if dir != Vector2.ZERO:
 		velocity.x = lerp(velocity.x, dir.normalized().x * spd, acceleration) # Cálculo da velocidade do objeto no eixo horizontal.

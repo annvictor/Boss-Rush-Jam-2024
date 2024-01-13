@@ -8,6 +8,5 @@ position = Vector2(25, 11)
 texture = ExtResource("1_61i8d")
 
 [node name="hpPoint" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-4, -1)
 texture = ExtResource("2_scpjx")
